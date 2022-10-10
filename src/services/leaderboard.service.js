@@ -25,7 +25,7 @@ export class LeaderboardService {
         `
     }
 
-    createLeaderboarddCache(leaderboard) {
+    createLeaderboardCache(leaderboard) {
         const path = resolve('public', 'leaderboard.json')
         return fs.writeFile(path, JSON.stringify(leaderboard))
     }
