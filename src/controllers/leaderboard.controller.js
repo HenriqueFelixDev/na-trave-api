@@ -12,32 +12,23 @@ export async function getLeaderboard(ctx) {
 
 function formatLeaderboardResult(leaderboardResult) {
     return leaderboardResult.map((score, index) => {
-        const {
-            name,
-            username,
-            hunches
-        } = score
+        const { name, username } = score
 
-        // Posição do usuário no ranking
+        // Posição do usuário na classificação
         const position = index + 1
 
-        // Número de palpites em que o usuário acertou
-        const points = hunches
-            .filter(hunch => hunch.won === true)
-            .length
-
-        // Número de palpites que o usuário realizou (e que o 
-        // resultado da partida já foi salvo)
-        const totalHunches = hunches.length
+        // Converte os valores em bigint para int
+        const hunches = parseInt(score.hunches)
+        const points = parseInt(score.points)
 
         // Percentual de acerto do usuário
-        const performance = numberUtils.getPercentual(points, totalHunches)
+        const performance = numberUtils.getPercentual(points, hunches)
 
         return {
             position,
             user: { name, username },
             points, 
-            hunches: totalHunches,
+            hunches,
             performance
         }
     })
