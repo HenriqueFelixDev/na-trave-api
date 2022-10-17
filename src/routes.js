@@ -15,6 +15,7 @@ import {
 import {
     authController,
     hunchesController,
+    leaderboardController,
     matchesController,
     teamsController,
     usersController
@@ -64,6 +65,12 @@ router.patch(
     '/v1/matches',
     roleMiddleware(['admin']),
     matchesController.updateMatchScore
+)
+
+// Leaderboard
+router.get(
+    '/v1/leaderboard',
+    leaderboardController.getLeaderboard
 )
 
 // Teams
